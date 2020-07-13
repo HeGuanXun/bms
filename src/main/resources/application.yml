@@ -1,0 +1,7 @@
+# 基于环境的配置分离   dev || test || prod
+# dev：开发环境
+# test：测试环境
+# prod： 生产环境
+spring:
+  profiles:
+    active: dev
