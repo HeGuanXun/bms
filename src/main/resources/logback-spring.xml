@@ -12,6 +12,7 @@
     <springProfile name="dev">
         <property name="LOG_PATH" value="D:/log/szhn_bms_dev.log"/>
     </springProfile>
+
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
     <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
 

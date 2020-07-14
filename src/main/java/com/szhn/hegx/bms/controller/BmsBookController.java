@@ -2,7 +2,7 @@ package com.szhn.hegx.bms.controller;
 
 import com.szhn.hegx.bms.modle.Book;
 import com.szhn.hegx.bms.service.BookService;
-import com.szhn.hegx.bms.utils.ApiResponse;
+import com.szhn.hegx.bms.utils.ResultBody;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -28,33 +28,30 @@ public class BmsBookController {
 
     @PostMapping("/insert")
     @ApiOperation(value = "/insert",httpMethod = "POST",notes = "新增")
-    public ApiResponse insert(Book book){
+    public ResultBody insert(Book book){
         bookService.insert(book);
-        return new ApiResponse();
+        return new ResultBody();
     }
+
     @GetMapping("/deleteById")
     @ApiOperation(value = "/deleteById",httpMethod = "GET",notes = "根据id删除图书")
-    public ApiResponse deleteById(Integer bid){
-        try {
-            bookService.deleteById(bid);
-        } catch (Exception e) {
-            LOG.error("删除失败，请联系管理员",e);
-            return new ApiResponse(ApiResponse.Status.INTERNAL_SERVER_ERROR.getCode(),ApiResponse.Status.INTERNAL_SERVER_ERROR.getStandardMessage(),null);
-        }
-        return new ApiResponse();
+    public ResultBody deleteById(Integer bid){
+        LOG.info("正在删除图书，删除id:",bid);
+        bookService.deleteById(bid);
+        return ResultBody.success();
     }
+
     @PostMapping("/update")
     @ApiOperation(value = "/update",httpMethod = "POST",notes = "更新接口")
-    public ApiResponse update(Book book){
+    public ResultBody update(Book book){
         bookService.update(book);
-        return new ApiResponse();
+        return ResultBody.success();
     }
+
     @GetMapping("/getBook")
     @ApiOperation(value = "/getBook",httpMethod = "GET",notes = "查询图书")
-    public ApiResponse getBook(Book book){
+    public ResultBody getBook(Book book){
         Book resultBook = bookService.getBook(book);
-        ApiResponse apiResponse = new ApiResponse();
-        apiResponse.setData(resultBook);
-        return apiResponse;
+        return ResultBody.success(resultBook);
     }
 }
