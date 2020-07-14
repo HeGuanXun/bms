@@ -1,6 +1,5 @@
 server:
   port: 8080
-
 # DataSource Config
 spring:
   datasource:
@@ -14,17 +13,13 @@ spring:
     console:
       enabled: true
 #mybatis:
-#mapper-locations: classpath:mapper/*Mapper.xml
-#type-aliases-package: com.szhn.hegx.bms
-
 mybatis:
   config-locations: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/*.xml
   type-aliases-package: com.szhn.hegx.bms.modle
-
-#showSql
+#logback
 logging:
-  level:
-    com:
-      example:
-        mapper : INFO
+    config: classpath:logback-spring.xml
+#swagger
+mconfig:
+  swagger-ui-open: true

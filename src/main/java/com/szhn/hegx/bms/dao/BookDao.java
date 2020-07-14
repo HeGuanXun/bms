@@ -2,7 +2,9 @@ package com.szhn.hegx.bms.dao;
 
 import com.szhn.hegx.bms.modle.Book;
 import com.szhn.hegx.bms.utils.Pagination;
+
 import java.util.List;
+
 
 /**
  * <p>TODO</p>
@@ -14,13 +16,13 @@ public interface BookDao {
 
     int insert(Book book);
 
-    void insertBatch(List<Book> books);
-
     int update(Book book);
 
     void deleteById(Integer id);
 
     Book getBook(Book Book);
+
+    List<Book> getBookAll(Book Book);
 
     /**
      * 分页查询

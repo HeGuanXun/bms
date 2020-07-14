@@ -6,6 +6,6 @@ package com.szhn.hegx.bms.exception;
  * @author 何冠勋
  * @since 2020/7/14
  **/
-public class BusinessException extends RuntimeException {
+public class CustomerException extends RuntimeException {
 
 }

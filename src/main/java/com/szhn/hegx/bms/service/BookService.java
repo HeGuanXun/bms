@@ -15,8 +15,6 @@ public interface BookService {
 
     int insert(Book book);
 
-    void insertBatch(List<Book> books);
-
     int update(Book book);
 
     void deleteById(Integer id);

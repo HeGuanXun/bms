@@ -28,7 +28,7 @@ public class Book {
     /**
      * 发布时间
      */
-    private Date publicationDate;
+    private String publicationDate;
 
     private BigDecimal price;
 
@@ -76,11 +76,11 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public Date getPublicationDate() {
+    public String getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(Date publicationDate) {
+    public void setPublicationDate(String publicationDate) {
         this.publicationDate = publicationDate;
     }
 
