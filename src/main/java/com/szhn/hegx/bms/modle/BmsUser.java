@@ -1,7 +1,5 @@
 package com.szhn.hegx.bms.modle;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,7 +11,6 @@ import java.util.List;
  * @author 何冠勋
  * @since 2020/7/13
  **/
-
 public class BmsUser {
 
     private Integer userId;
