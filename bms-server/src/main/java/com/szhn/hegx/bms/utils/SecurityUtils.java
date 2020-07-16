@@ -1,6 +1,6 @@
 package com.szhn.hegx.bms.utils;
 
-import com.szhn.hegx.bms.security.JwtAuthenticatioToken;
+import com.szhn.hegx.bms.security.JwtAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,8 +24,8 @@ public class SecurityUtils {
 	 * @param authenticationManager
 	 * @return
 	 */
-	public static JwtAuthenticatioToken login(HttpServletRequest request, String username, String password, AuthenticationManager authenticationManager) {
-		JwtAuthenticatioToken token = new JwtAuthenticatioToken(username, password);
+	public static JwtAuthenticationToken login(HttpServletRequest request, String username, String password, AuthenticationManager authenticationManager) {
+		JwtAuthenticationToken token = new JwtAuthenticationToken(username, password);
 		token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 		// 执行登录认证过程
 	    Authentication authentication = authenticationManager.authenticate(token);
@@ -42,7 +42,7 @@ public class SecurityUtils {
 	 */
 	public static void checkAuthentication(HttpServletRequest request) {
 		// 获取令牌并根据令牌获取登录认证信息
-		Authentication authentication = JwtTokenUtils.getAuthenticationeFromToken(request);
+		Authentication authentication = JwtTokenUtils.getAuthenticationFromToken(request);
 		// 设置登录认证信息到上下文
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}

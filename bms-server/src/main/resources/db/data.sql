@@ -16,8 +16,8 @@ INSERT INTO `book` VALUES (12, '图书管理系统源码如何下载运行', '�
 
 DELETE FROM bmsUser;
 DELETE FROM user;
-INSERT INTO `user` VALUES (1, 'root', 'root',1);
-INSERT INTO `user` VALUES (2, 'hegx', 'hegx',2);
+INSERT INTO `user` VALUES (1, 'szhn', 'szhn',1);
+INSERT INTO `user` VALUES (2, 'hegx', '123456',2);
 
 DELETE FROM role;
 INSERT INTO `role` VALUES (1,'ROLE_ADMIN');

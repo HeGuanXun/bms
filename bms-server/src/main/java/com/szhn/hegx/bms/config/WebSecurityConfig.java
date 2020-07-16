@@ -30,12 +30,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable()
 				.authorizeRequests()
 				.antMatchers("/login").permitAll()
-				.antMatchers("/hello").permitAll()
-				.antMatchers("/hello.html").permitAll()
 				.antMatchers("/swagger**/**").permitAll()
 				.antMatchers("/webjars/**").permitAll()
 				.antMatchers("/h2-console/**").permitAll()
 				.antMatchers("/doc.html").permitAll()
+				.antMatchers("/book/deleteById").access("hasRole('ROLE_ADMIN')")
 				.anyRequest().authenticated()
 				.and().formLogin().loginPage("/login").permitAll()
 				.and().logout()
@@ -65,15 +64,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationManager authenticationManager() throws Exception {
 		return super.authenticationManager();
 	}
-//	@Bean
-//	@Override
-//	public UserDetailsService userDetailsService() {
-//		UserDetails user = BmsUser.withDefaultPasswordEncoder()
-//				.username("user")
-//				.password("password")
-//				.roles("USER")
-//				.build();
-//
-//		return new InMemoryUserDetailsManager(user);
-//	}
 }

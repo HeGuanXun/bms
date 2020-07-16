@@ -1,9 +1,11 @@
 package com.szhn.hegx.bms.exception;
 
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import com.szhn.hegx.bms.utils.CommonEnum;
 import com.szhn.hegx.bms.utils.ResultBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.ProviderNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -46,7 +48,18 @@ public class GlobalExceptionHandler {
 		return ResultBody.error(CommonEnum.INTERNAL_SERVER_ERROR);
 	}
 
-
+	/**
+	 * 权限异常处理
+	 * @param req
+	 * @param e
+	 * @return
+	 */
+	@ExceptionHandler(value = ProviderNotFoundException.class)
+	@ResponseBody
+	public ResultBody exceptionAuthenticationHandler(HttpServletRequest req, Exception e){
+		logger.error("未登录！");
+		return ResultBody.error(CommonEnum.AUTH_NO);
+	}
     /**
         * 处理其他异常
      * @param req

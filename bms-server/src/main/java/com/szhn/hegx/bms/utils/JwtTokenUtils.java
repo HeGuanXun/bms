@@ -1,10 +1,12 @@
 package com.szhn.hegx.bms.utils;
 
 import com.szhn.hegx.bms.security.GrantedAuthorityImpl;
-import com.szhn.hegx.bms.security.JwtAuthenticatioToken;
+import com.szhn.hegx.bms.security.JwtAuthenticationToken;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import net.bytebuddy.implementation.bytecode.Throw;
+import org.springframework.security.authentication.ProviderNotFoundException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -89,7 +91,7 @@ public class JwtTokenUtils implements Serializable {
 	 * @param token 令牌
 	 * @return 用户名
 	 */
-	public static Authentication getAuthenticationeFromToken(HttpServletRequest request) {
+	public static Authentication getAuthenticationFromToken(HttpServletRequest request) {
 		Authentication authentication = null;
 		// 获取请求携带的令牌
 		String token = JwtTokenUtils.getToken(request);
@@ -115,7 +117,7 @@ public class JwtTokenUtils implements Serializable {
 						authorities.add(new GrantedAuthorityImpl((String) ((Map) object).get("authority")));
 					}
 				}
-				authentication = new JwtAuthenticatioToken(username, null, authorities, token);
+				authentication = new JwtAuthenticationToken(username, null, authorities, token);
 			} else {
 				if(validateToken(token, SecurityUtils.getUsername())) {
 					// 如果上下文中Authentication非空，且请求令牌合法，直接返回当前登录认证信息
@@ -150,6 +152,9 @@ public class JwtTokenUtils implements Serializable {
 	 */
 	public static Boolean validateToken(String token, String username) {
 	    String userName = getUsernameFromToken(token);
+	    if (userName==null){
+	    	throw new ProviderNotFoundException(CommonEnum.AUTH_NO.getResultMsg());
+		}
 	    return (userName.equals(username) && !isTokenExpired(token));
 	}
 

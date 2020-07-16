@@ -1,15 +1,12 @@
 package com.szhn.hegx.bms.controller;
 
-import com.szhn.hegx.bms.dao.UserDao;
-import com.szhn.hegx.bms.security.JwtAuthenticatioToken;
+import com.szhn.hegx.bms.security.JwtAuthenticationToken;
 import com.szhn.hegx.bms.utils.ResultBody;
 import com.szhn.hegx.bms.utils.SecurityUtils;
 import com.szhn.hegx.bms.utils.SpringUtil;
 import com.szhn.hegx.bms.vo.LoginBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,7 +35,7 @@ public class LoginController {
             authenticationManager = SpringUtil.getBean(AuthenticationManager.class);
         }
         // 系统登录认证
-        JwtAuthenticatioToken token = SecurityUtils.login(request, username, password, authenticationManager);
+        JwtAuthenticationToken token = SecurityUtils.login(request, username, password, authenticationManager);
 
         return ResultBody.success(token);
     }
