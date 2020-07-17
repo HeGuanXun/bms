@@ -1,5 +1,6 @@
 package com.szhn.hegx.bms.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -9,7 +10,7 @@ import java.math.BigDecimal;
  * @since 2020/7/13
  **/
 
-public class Book {
+public class Book implements Serializable {
 
     private Integer bid;
 

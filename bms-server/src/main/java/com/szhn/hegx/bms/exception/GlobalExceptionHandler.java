@@ -1,6 +1,5 @@
 package com.szhn.hegx.bms.exception;
 
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import com.szhn.hegx.bms.utils.CommonEnum;
 import com.szhn.hegx.bms.utils.ResultBody;
 import org.slf4j.Logger;

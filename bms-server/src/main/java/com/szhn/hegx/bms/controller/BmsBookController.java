@@ -1,7 +1,9 @@
 package com.szhn.hegx.bms.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.szhn.hegx.bms.model.Book;
 import com.szhn.hegx.bms.service.BookService;
+import com.szhn.hegx.bms.utils.PageBean;
 import com.szhn.hegx.bms.utils.ResultBody;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * <p>TODO</p>
  *
@@ -19,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
  **/
 @RestController
 @RequestMapping("/book")
-@Api(value = "/book",tags = {"图书管理增删改查接口"})
+@Api(value = "/book", tags = {"图书管理增删改查接口"})
 public class BmsBookController {
 
     private final static Logger LOG = LoggerFactory.getLogger(BmsBookController.class);
@@ -28,32 +32,32 @@ public class BmsBookController {
     private BookService bookService;
 
     @PostMapping("/insert")
-    @ApiOperation(value = "/insert",httpMethod = "POST",notes = "新增")
-    public ResultBody insert(Book book){
+    @ApiOperation(value = "/insert", httpMethod = "POST", notes = "新增")
+    public ResultBody insert(Book book) {
         bookService.insert(book);
         return new ResultBody();
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/deleteById")
-    @ApiOperation(value = "/deleteById",httpMethod = "GET",notes = "根据id删除图书")
-    public ResultBody deleteById(Integer bid){
-        LOG.info("正在删除图书，删除id:",bid);
+    @ApiOperation(value = "/deleteById", httpMethod = "GET", notes = "根据id删除图书")
+    public ResultBody deleteById(Integer bid) {
+        LOG.info("正在删除图书，删除id:", bid);
         bookService.deleteById(bid);
         return ResultBody.success();
     }
 
     @PostMapping("/update")
-    @ApiOperation(value = "/update",httpMethod = "POST",notes = "更新接口")
-    public ResultBody update(Book book){
+    @ApiOperation(value = "/update", httpMethod = "POST", notes = "更新接口")
+    public ResultBody update(Book book) {
         bookService.update(book);
         return ResultBody.success();
     }
 
-    @GetMapping("/getBook")
-    @ApiOperation(value = "/getBook",httpMethod = "GET",notes = "查询图书")
-    public ResultBody getBook(Book book){
-        Book resultBook = bookService.getBook(book);
-        return ResultBody.success(resultBook);
+    @GetMapping("/getBookByPage")
+    @ApiOperation(value = "/getBookByPage", httpMethod = "GET", notes = "查询图书")
+    public ResultBody getBook(Book book, int currentPage,int pageSize) {
+        PageBean<Book> bookByPage = bookService.getBookByPage(book, currentPage, pageSize);
+        return ResultBody.success(bookByPage);
     }
 }

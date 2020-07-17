@@ -12,6 +12,9 @@ spring:
   h2:
     console:
       enabled: true
+  cache:
+    ehcache:
+        config: classpath:ehcache/ehcache.xml
 #mybatis:
 mybatis:
   config-locations: classpath:mybatis/mybatis-config.xml
@@ -19,12 +22,7 @@ mybatis:
   type-aliases-package: com.szhn.hegx.bms.model
 #logback
 logging:
-    config: classpath:logback-spring.xml
+    config: classpath:logback/logback-spring.xml
 #swagger
 mconfig:
   swagger-ui-open: true
-#jwt
-jwt:
-  secret: secret
-  expiration: 7200000
-  token: Authorization

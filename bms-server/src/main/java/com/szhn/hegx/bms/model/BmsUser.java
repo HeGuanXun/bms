@@ -1,6 +1,7 @@
 package com.szhn.hegx.bms.model;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * @author 何冠勋
  * @since 2020/7/13
  **/
-public class BmsUser {
+public class BmsUser implements Serializable {
 
     private Integer userId;
 

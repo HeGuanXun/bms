@@ -1,7 +1,10 @@
 package com.szhn.hegx.bms.service;
 
 import com.szhn.hegx.bms.model.Book;
+import com.szhn.hegx.bms.utils.PageBean;
 import com.szhn.hegx.bms.utils.Pagination;
+
+import java.util.List;
 
 /**
  * <p>TODO</p>
@@ -11,18 +14,26 @@ import com.szhn.hegx.bms.utils.Pagination;
  **/
 public interface BookService {
 
-    int insert(Book book);
-
-    int update(Book book);
-
-    void deleteById(Integer id);
-
-    Book getBook(Book Book);
-
     /**
-     * 分页查询
      * @param book
      * @return
      */
-    Pagination<Book> getBookByPage(Pagination<Book> book);
+    int insert(Book book);
+
+    /**
+     * @param book
+     * @return
+     */
+    int update(Book book);
+
+    /**
+     * @param id
+     */
+    void deleteById(Integer id);
+
+    /**分页查询
+     * @param Book
+     * @return
+     */
+    PageBean<Book> getBookByPage(Book Book,int currentPage,int pageSize);
 }

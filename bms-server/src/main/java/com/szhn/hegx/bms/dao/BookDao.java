@@ -20,15 +20,8 @@ public interface BookDao {
 
     void deleteById(Integer id);
 
-    Book getBook(Book Book);
-
     List<Book> getBookAll(Book Book);
 
-    /**
-     * 分页查询
-     * @param book
-     * @return
-     */
-    Pagination<Book> getBookByPage(Pagination<Book> book);
+    int countBook(Book book);
 
 }

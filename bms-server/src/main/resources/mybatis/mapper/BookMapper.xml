@@ -43,9 +43,17 @@
     </if>
   </sql>
 
-  <select id="getBook" resultMap="BaseResultMap" parameterType="Book" >
+  <select id="getBookAll" resultMap="BaseResultMap" parameterType="Book" >
     select 
     <include refid="Base_Column_List" />
+    from book
+    where 1 = 1
+    <include refid="Base_Column_List_condition" />
+  </select>
+
+  <select id="countBook" resultType="Integer" parameterType="Book" >
+    select
+        count(1)
     from book
     where 1 = 1
     <include refid="Base_Column_List_condition" />
